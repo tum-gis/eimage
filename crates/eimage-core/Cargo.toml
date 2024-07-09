@@ -1,0 +1,15 @@
+[package]
+name = "eimage-core"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core primitives and operations for processing image collections in 3D space."
+
+[dependencies]
+ecoord = { workspace = true }
+
+image = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }

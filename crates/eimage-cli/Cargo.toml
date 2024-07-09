@@ -1,0 +1,24 @@
+[package]
+name = "eimage-cli"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "CLI tool for processing image collections in 3D space."
+
+
+[dependencies]
+eimage = { version = "0.0.1-alpha.3", path = "../eimage" }
+eimage-io = { version = "0.0.1-alpha.3", path = "../eimage-io" }
+
+ecoord = { workspace = true }
+
+
+clap = { workspace = true, features = ["derive"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# TODO: remove
+image = { workspace = true }
+chrono = { workspace = true }
