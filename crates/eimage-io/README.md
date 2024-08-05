@@ -2,8 +2,7 @@
 
 IO operations for processing image collections in 3D space.
 
-> [!WARNING]  
-> The library is at an early stage of development.
+The library is at an early stage of development.
 
 ## Contributing
 
