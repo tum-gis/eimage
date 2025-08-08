@@ -1,7 +1,7 @@
-use crate::eimage::write_impl::write_eimage_format;
-use crate::eimage::{FILE_EXTENSION_EIMAGE_COMPRESSED, FILE_EXTENSION_EIMAGE_UNCOMPRESSED};
 use crate::Error;
 use crate::Error::{InvalidFileExtension, NoFileExtension};
+use crate::eimage::write_impl::write_eimage_format;
+use crate::eimage::{FILE_EXTENSION_EIMAGE_COMPRESSED, FILE_EXTENSION_EIMAGE_UNCOMPRESSED};
 use eimage_core::ImageCollection;
 use std::fs::{File, OpenOptions};
 use std::io::Write;

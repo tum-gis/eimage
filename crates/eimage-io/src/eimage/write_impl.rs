@@ -4,6 +4,9 @@ use std::io::{Cursor, Write};
 use std::path::PathBuf;
 use tar::Builder;
 
+pub const DEFAULT_IMAGES_PATH: &str = "images";
+pub const DEFAULT_ROS_TOPIC_SEPARATOR: &str = "/";
+
 pub fn write_eimage_format<W: Write>(
     writer: W,
     image_collection: ImageCollection,
@@ -15,16 +18,21 @@ pub fn write_eimage_format<W: Write>(
     let mut archive_builder = Builder::new(writer);
 
     // image collection
-    archive_builder.append_dir("images", ".")?;
+    let image_directory_path = PathBuf::from(DEFAULT_IMAGES_PATH);
+    archive_builder.append_dir(&image_directory_path, ".")?;
 
     for current_frame_id in image_collection.get_frame_ids() {
         let current_image_series = image_collection.get_image_series(&current_frame_id)?;
         let current_images = current_image_series.get_images();
-        let dir_path = PathBuf::from("images").join(current_frame_id.to_string());
+        let sanitized_directory_name = current_frame_id
+            .to_string()
+            .trim_start_matches(DEFAULT_ROS_TOPIC_SEPARATOR)
+            .replace(DEFAULT_ROS_TOPIC_SEPARATOR, "___");
+        let frame_directory_path = image_directory_path.join(sanitized_directory_name);
 
         for (current_index, current_image) in current_images.iter().enumerate() {
             let buffer = current_image.get_buffer();
-            let file_path = dir_path.join(current_index.to_string() + ".png");
+            let file_path = frame_directory_path.join(current_index.to_string() + ".png");
 
             let mut image_data_buffer: Vec<u8> = Vec::new();
             buffer.write_to(
@@ -40,7 +48,7 @@ pub fn write_eimage_format<W: Write>(
         }
 
         // current_image_series.
-        archive_builder.append_dir(dir_path, ".")?;
+        archive_builder.append_dir(frame_directory_path, ".")?;
     }
 
     archive_builder.finish()?;

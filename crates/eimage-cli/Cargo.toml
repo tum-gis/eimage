@@ -9,12 +9,13 @@ description = "CLI tool for processing image collections in 3D space."
 
 
 [dependencies]
-eimage = { version = "0.0.1-alpha.4", path = "../eimage" }
-eimage-io = { version = "0.0.1-alpha.4", path = "../eimage-io" }
+eimage = { version = "0.0.1-alpha.8", path = "../eimage" }
+eimage-io = { version = "0.0.1-alpha.8", path = "../eimage-io" }
 
 ecoord = { workspace = true }
 
-
+thiserror = { workspace = true }
+anyhow = { workspace = true }
 clap = { workspace = true, features = ["derive"] }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }

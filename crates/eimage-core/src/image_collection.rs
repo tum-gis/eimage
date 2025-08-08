@@ -33,4 +33,8 @@ impl ImageCollection {
     pub fn get_image_series(&self, frame_id: &FrameId) -> Result<&ImageSeries, Error> {
         self.image_series.get(frame_id).ok_or(ContainsNoImageSeries)
     }
+
+    pub fn total_image_count(&self) -> usize {
+        self.image_series.values().map(|x| x.len()).sum()
+    }
 }

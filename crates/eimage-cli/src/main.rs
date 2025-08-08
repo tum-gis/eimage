@@ -1,15 +1,17 @@
-mod arguments;
+mod cli;
 mod commands;
+mod error;
 
-use crate::arguments::{Arguments, Commands};
+use crate::cli::{Cli, Commands};
+use anyhow::Result;
 use clap::Parser;
 use std::path::PathBuf;
 
-fn main() {
+fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
-    let arguments = Arguments::parse();
+    let cli = Cli::parse();
 
-    match &arguments.command {
+    match &cli.command {
         Commands::Test {
             file_path,
             output_file_path,
@@ -17,7 +19,9 @@ fn main() {
             let file_path = PathBuf::from(file_path);
             let output_file_path = PathBuf::from(output_file_path);
 
-            commands::test::run(file_path, output_file_path);
+            commands::test::run(file_path, output_file_path)?;
         }
     }
+
+    Ok(())
 }
