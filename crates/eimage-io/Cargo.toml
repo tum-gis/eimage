@@ -9,7 +9,7 @@ description = "IO operations for processing image collections in 3D space."
 
 
 [dependencies]
-eimage-core = { version = "0.0.1-alpha.8", path = "../eimage-core" }
+eimage-core = { version = "0.0.1-alpha.9", path = "../eimage-core" }
 
 ecoord = { workspace = true }
 
@@ -17,4 +17,3 @@ thiserror = { workspace = true }
 image = { workspace = true }
 tar = { workspace = true }
 zstd = { workspace = true }
-regex = "1.11.1"

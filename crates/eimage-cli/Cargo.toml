@@ -9,8 +9,7 @@ description = "CLI tool for processing image collections in 3D space."
 
 
 [dependencies]
-eimage = { version = "0.0.1-alpha.8", path = "../eimage" }
-eimage-io = { version = "0.0.1-alpha.8", path = "../eimage-io" }
+eimage = { version = "0.0.1-alpha.9", path = "../eimage" }
 
 ecoord = { workspace = true }
 
@@ -23,3 +22,8 @@ tracing-subscriber = { workspace = true }
 # TODO: remove
 image = { workspace = true }
 chrono = { workspace = true }
+
+
+[[bin]]
+name = "eimage"
+path = "src/main.rs"

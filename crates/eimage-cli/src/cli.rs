@@ -1,4 +1,5 @@
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, ValueHint};
+use std::path::PathBuf;
 
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None, propagate_version = true)]
@@ -12,11 +13,11 @@ pub enum Commands {
     /// Tests
     Test {
         /// Path to an example image
-        #[clap(long)]
-        file_path: String,
+        #[clap(long, value_hint = ValueHint::FilePath)]
+        file_path: PathBuf,
 
         /// Path to an example image
-        #[clap(long)]
-        output_file_path: String,
+        #[clap(long, value_hint = ValueHint::FilePath)]
+        output_file_path: PathBuf,
     },
 }
