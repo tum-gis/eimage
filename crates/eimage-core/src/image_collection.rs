@@ -1,19 +1,19 @@
 use crate::error::Error;
 use crate::error::Error::ContainsNoImageSeries;
 use crate::image_series::ImageSeries;
-use ecoord::{FrameId, ReferenceFrames};
+use ecoord::{FrameId, TransformTree};
 use std::collections::{HashMap, HashSet};
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone)]
 pub struct ImageCollection {
     pub(crate) image_series: HashMap<FrameId, ImageSeries>,
-    pub(crate) reference_frames: ReferenceFrames,
+    pub(crate) transform_tree: TransformTree,
 }
 
 impl ImageCollection {
     pub fn new(
         image_series: HashMap<FrameId, ImageSeries>,
-        reference_frames: ReferenceFrames,
+        transform_tree: TransformTree,
     ) -> Result<Self, Error> {
         if image_series.is_empty() {
             return Err(ContainsNoImageSeries);
@@ -21,7 +21,7 @@ impl ImageCollection {
 
         let image_collection = Self {
             image_series,
-            reference_frames,
+            transform_tree,
         };
         Ok(image_collection)
     }

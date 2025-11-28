@@ -1,4 +1,4 @@
-use ecoord::{FrameId, ReferenceFrames};
+use ecoord::{FrameId, TransformTree};
 use std::collections::HashMap;
 
 use crate::error::Error;
@@ -16,17 +16,12 @@ pub fn run(file_path: impl AsRef<Path>, output_file_path: impl AsRef<Path>) -> R
         eimage::Image::new(individual_image, chrono::offset::Utc::now());
     // let img2 = ImageReader::new(Cursor::new(bytes)).with_guessed_format()?.decode()?;
 
-    let reference_frames = ReferenceFrames::new(
-        Default::default(),
-        Default::default(),
-        Default::default(),
-        Default::default(),
-    )?;
+    let transform_tree = TransformTree::new(Default::default(), Default::default())?;
 
     let image_series = ImageSeries::new(vec![individual_image])?;
     let mut image_series_map: HashMap<FrameId, ImageSeries> = HashMap::new();
     image_series_map.insert(FrameId::from("test"), image_series);
-    let image_collection = ImageCollection::new(image_series_map, reference_frames)?;
+    let image_collection = ImageCollection::new(image_series_map, transform_tree)?;
 
     eimage::io::EimageWriter::from_path(output_file_path)?.finish(image_collection)?;
 

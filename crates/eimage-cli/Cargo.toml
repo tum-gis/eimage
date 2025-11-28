@@ -9,7 +9,7 @@ description = "CLI tool for processing image collections in 3D space."
 
 
 [dependencies]
-eimage = { version = "0.0.1-alpha.9", path = "../eimage" }
+eimage = { version = "0.0.1-alpha.10", path = "../eimage" }
 
 ecoord = { workspace = true }
 
